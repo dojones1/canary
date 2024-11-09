@@ -1,53 +1,191 @@
 # Deployment Information
 pods_status:
-  main_pods_running: #TODO: Enter number of main pods running
-  canary_pods_running: #TODO: Enter number of canary pods running
+# NAME                                                     READY   STATUS    RESTARTS   AGE
+# alertmanager-prometheus-kube-prometheus-alertmanager-0   2/2     Running   0          43m
+# canary-demo-canary-84bcf9cd4d-f4jd6                      1/1     Running   0          15m
+# canary-demo-d655c9c44-6hp7s                              1/1     Running   0          43m
+# canary-demo-d655c9c44-8dt6f                              1/1     Running   0          43m
+# canary-demo-d655c9c44-lvwxf                              1/1     Running   0          43m
+# prometheus-grafana-5f78b56899-6wd6n                      3/3     Running   0          43m
+# prometheus-kube-prometheus-operator-78fbb994b9-hnb67     1/1     Running   0          43m
+# prometheus-kube-state-metrics-7fb964d669-vrjqd           1/1     Running   0          43m
+# prometheus-prometheus-kube-prometheus-prometheus-0       2/2     Running   0          43m
+# prometheus-prometheus-node-exporter-p5j9d                1/1     Running   0          43m
+  main_pods_running: 3 #TODO: Enter number of main pods running
+  canary_pods_running: 1 #TODO: Enter number of canary pods running
 
 # Service Information
 service_endpoints:
-  main_service_cluster_ip: #TODO: Enter the ClusterIP of main service
-  canary_service_cluster_ip: #TODO: Enter the ClusterIP of canary service
+# NAME                                      TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+# alertmanager-operated                     ClusterIP   None             <none>        9093/TCP,9094/TCP,9094/UDP   43m
+# canary-demo                               ClusterIP   10.98.217.209    <none>        80/TCP                       43m
+# canary-demo-canary                        ClusterIP   10.106.255.72    <none>        80/TCP                       43m
+# prometheus-grafana                        ClusterIP   10.99.10.97      <none>        80/TCP                       43m
+# prometheus-kube-prometheus-alertmanager   ClusterIP   10.99.133.176    <none>        9093/TCP,8080/TCP            43m
+# prometheus-kube-prometheus-operator       ClusterIP   10.110.139.137   <none>        443/TCP                      43m
+# prometheus-kube-prometheus-prometheus     ClusterIP   10.106.36.13     <none>        9090/TCP,8080/TCP            43m
+# prometheus-kube-state-metrics             ClusterIP   10.106.44.17     <none>        8080/TCP                     43m
+# prometheus-operated                       ClusterIP   None             <none>        9090/TCP                     43m
+# prometheus-prometheus-node-exporter       ClusterIP   10.96.224.204    <none>        9100/TCP                     43m
+  main_service_cluster_ip: 10.98.217.209 #TODO: Enter the ClusterIP of main service
+  canary_service_cluster_ip: 10.106.255.72 #TODO: Enter the ClusterIP of canary service
 
 # Ingress Information
 ingress_details:
-  address: #TODO: Enter the Ingress controller IP address
-  host: #TODO: Enter the configured host (should be canary-demo.local)
+# NAME                       CLASS   HOSTS               ADDRESS        PORTS   AGE
+# canary-demo-ingress        nginx   canary-demo.local   192.168.49.2   80      43m
+# canary-demo-main-ingress   nginx   canary-demo.local   192.168.49.2   80      43m
+  address: 192.168.49.2 #TODO: Enter the Ingress controller IP address
+  host: canary-demo.local #TODO: Enter the configured host (should be canary-demo.local)
 
 # Metrics
 main_deployment_metrics:
-  http_requests_total: #TODO: Enter the value from main deployment's /metrics endpoint
-  process_cpu_seconds_total: #TODO: Enter the CPU seconds from main deployment
-  process_resident_memory_bytes: #TODO: Enter the memory usage from main deployment
+# # HELP python_gc_objects_collected_total Objects collected during gc
+# # TYPE python_gc_objects_collected_total counter
+# python_gc_objects_collected_total{generation="0"} 845.0
+# python_gc_objects_collected_total{generation="1"} 33.0
+# python_gc_objects_collected_total{generation="2"} 0.0
+# # HELP python_gc_objects_uncollectable_total Uncollectable object found during GC
+# # TYPE python_gc_objects_uncollectable_total counter
+# python_gc_objects_uncollectable_total{generation="0"} 0.0
+# python_gc_objects_uncollectable_total{generation="1"} 0.0
+# python_gc_objects_uncollectable_total{generation="2"} 0.0
+# # HELP python_gc_collections_total Number of times this generation was collected
+# # TYPE python_gc_collections_total counter
+# python_gc_collections_total{generation="0"} 76.0
+# python_gc_collections_total{generation="1"} 6.0
+# python_gc_collections_total{generation="2"} 0.0
+# # HELP python_info Python platform information
+# # TYPE python_info gauge
+# python_info{implementation="CPython",major="3",minor="9",patchlevel="20",version="3.9.20"} 1.0
+# # HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# # TYPE process_virtual_memory_bytes gauge
+# process_virtual_memory_bytes 1.10362624e+08
+# # HELP process_resident_memory_bytes Resident memory size in bytes.
+# # TYPE process_resident_memory_bytes gauge
+# process_resident_memory_bytes 3.2509952e+07
+# # HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# # TYPE process_start_time_seconds gauge
+# process_start_time_seconds 1.73119053902e+09
+# # HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# # TYPE process_cpu_seconds_total counter
+# process_cpu_seconds_total 0.46
+# # HELP process_open_fds Number of open file descriptors.
+# # TYPE process_open_fds gauge
+# process_open_fds 6.0
+# # HELP process_max_fds Maximum number of open file descriptors.
+# # TYPE process_max_fds gauge
+# process_max_fds 1.048576e+06
+# # HELP http_requests_total Total HTTP Requests
+# # TYPE http_requests_total counter
+# http_requests_total{version="v1"} 39.0
+# # HELP http_requests_created Total HTTP Requests
+# # TYPE http_requests_created gauge
+# http_requests_created{version="v1"} 1.73119066713695e+09
+  http_requests_total: 39 #TODO: Enter the value from main deployment's /metrics endpoint
+  process_cpu_seconds_total: 0.46 #TODO: Enter the CPU seconds from main deployment
+  process_resident_memory_bytes: 3.2509952e+07 #TODO: Enter the memory usage from main deployment
 
 canary_deployment_metrics:
-  http_requests_total: #TODO: Enter the value from canary deployment's /metrics endpoint
-  process_cpu_seconds_total: #TODO: Enter the CPU seconds from canary deployment
-  process_resident_memory_bytes: #TODO: Enter the memory usage from canary deployment
+# # HELP python_gc_objects_collected_total Objects collected during gc
+# # TYPE python_gc_objects_collected_total counter
+# python_gc_objects_collected_total{generation="0"} 381.0
+# python_gc_objects_collected_total{generation="1"} 33.0
+# python_gc_objects_collected_total{generation="2"} 0.0
+# # HELP python_gc_objects_uncollectable_total Uncollectable object found during GC
+# # TYPE python_gc_objects_uncollectable_total counter
+# python_gc_objects_uncollectable_total{generation="0"} 0.0
+# python_gc_objects_uncollectable_total{generation="1"} 0.0
+# python_gc_objects_uncollectable_total{generation="2"} 0.0
+# # HELP python_gc_collections_total Number of times this generation was collected
+# # TYPE python_gc_collections_total counter
+# python_gc_collections_total{generation="0"} 75.0
+# python_gc_collections_total{generation="1"} 6.0
+# python_gc_collections_total{generation="2"} 0.0
+# # HELP python_info Python platform information
+# # TYPE python_info gauge
+# python_info{implementation="CPython",major="3",minor="9",patchlevel="20",version="3.9.20"} 1.0
+# # HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# # TYPE process_virtual_memory_bytes gauge
+# process_virtual_memory_bytes 1.10710784e+08
+# # HELP process_resident_memory_bytes Resident memory size in bytes.
+# # TYPE process_resident_memory_bytes gauge
+# process_resident_memory_bytes 3.2428032e+07
+# # HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# # TYPE process_start_time_seconds gauge
+# process_start_time_seconds 1.73119220869e+09
+# # HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# # TYPE process_cpu_seconds_total counter
+# process_cpu_seconds_total 0.29000000000000004
+# # HELP process_open_fds Number of open file descriptors.
+# # TYPE process_open_fds gauge
+# process_open_fds 6.0
+# # HELP process_max_fds Maximum number of open file descriptors.
+# # TYPE process_max_fds gauge
+# process_max_fds 1.048576e+06
+# # HELP http_requests_total Total HTTP Requests
+# # TYPE http_requests_total counter
+# http_requests_total{version="v2"} 12.0
+# # HELP http_requests_created Total HTTP Requests
+# # TYPE http_requests_created gauge
+# http_requests_created{version="v2"} 1.7311924333770797e+09
+  http_requests_total: 12.0 #TODO: Enter the value from canary deployment's /metrics endpoint
+  process_cpu_seconds_total: 0.29000000000000004 #TODO: Enter the CPU seconds from canary deployment
+  process_resident_memory_bytes: 3.2428032e+07 #TODO: Enter the memory usage from canary deployment
 
 # Traffic Distribution Test
 traffic_test_results:
-  total_requests_sent: #TODO: Enter how many test requests you sent (should be 20)
-  main_responses_received: #TODO: Enter how many responses were from main deployment
-  canary_responses_received: #TODO: Enter how many responses were from canary deployment
-  actual_canary_percentage: #TODO: Calculate the actual percentage of canary traffic
+
+  total_requests_sent: 20 #TODO: Enter how many test requests you sent (should be 20)
+  main_responses_received: 15 #TODO: Enter how many responses were from main deployment
+  canary_responses_received: 5 #TODO: Enter how many responses were from canary deployment
+  actual_canary_percentage: 25% #TODO: Calculate the actual percentage of canary traffic
 
 # Prometheus Queries
 prometheus_metrics:
+# could not get these metrics to work for me.
   main_request_rate: #TODO: Enter the result of rate(http_requests_total{version="v1"}[5m])
   canary_request_rate: #TODO: Enter the result of rate(http_requests_total{version="v2"}[5m])
 
 # Rollback Test
-rollback_test:
-  previous_revision: #TODO: Enter the revision number before rollback
-  rollback_command_used: #TODO: Enter the helm rollback command you used
-  time_to_rollback_seconds: #TODO: Enter how long the rollback took to complete
+# $ time(helm rollback canary-demo 3 -n canary-demo)
+# Rollback was a success! Happy Helming!
 
-# Error Budget Calculation (based on 99.9% SLO)
+# real    0m0.158s
+# user    0m0.130s
+# sys     0m0.049s
+rollback_test:
+  previous_revision: 1 #TODO: Enter the revision number before rollback
+  rollback_command_used: helm rollback canary-demo 3 -n canary-demo #TODO: Enter the helm rollback command you used
+  time_to_rollback_seconds: 0.158 #TODO: Enter how long the rollback took to complete
+
 error_budget:
-  monthly_error_budget_seconds: #TODO: Calculate and enter the monthly error budget in seconds
-  remaining_error_budget_percentage: #TODO: Enter current remaining error budget percentage
+# Error Budget Calculation (based on 99.9% SLO)
+# @dojones1 ➜ /workspaces/canary/canary-demo (main) $ python compute_error_budget.py
+# Calculating error budget...
+# Make sure you have port-forwarded Prometheus:
+# kubectl port-forward svc/prometheus-operated 9090:9090 -n canary-demo
+
+# Fetching data...
+
+# Results:
+# --------------------------------------------------
+# Monthly Error Budget (seconds): 2592.00
+# Remaining Error Budget (%): 100.00%
+
+# Detailed Statistics:
+# Total Requests (30d): 0
+# Total Errors (30d): 0
+
+# For answers.yml:
+# --------------------------------------------------
+# error_budget:
+#   monthly_error_budget_seconds: 2592.00
+#   remaining_error_budget_percentage: 100.00
+  monthly_error_budget_seconds: 2592 #TODO: Calculate and enter the monthly error budget in seconds
+  remaining_error_budget_percentage: 100 #TODO: Enter current remaining error budget percentage
 
 # Additional Observations
 observations:
-  unexpected_behaviors: #TODO: List any unexpected behaviors you observed
+  unexpected_behaviors: Could not get the prometheus queries to work for me - no data returned
   suggested_improvements: #TODO: List any improvements you would suggest
